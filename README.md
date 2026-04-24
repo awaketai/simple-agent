@@ -10,29 +10,34 @@ pnpm install
 
 需要 Node.js >= 22。
 
-## 配置 OpenAI 连接
+## 配置
 
-支持两种方式：
-
-**方式一：环境变量（默认）**
+复制 `.env.example` 为 `.env` 并填入你的 API 信息：
 
 ```bash
-export OPENAI_API_KEY="your-openai-api-key"
-# 可选，自定义 API 地址（兼容 OpenAI 格式的第三方服务）
-export OPENAI_BASE_URL="https://api.openai.com/v1"
+cp .env.example .env
 ```
 
-不传 `apiKey` / `baseURL` 参数时，SDK 自动从环境变量读取。
+```env
+# 必填：API Key
+OPENAI_API_KEY=your-api-key
 
-**方式二：代码中传入**
+# 可选：自定义 API 地址（兼容 OpenAI 格式的第三方服务，如智谱、DeepSeek 等）
+OPENAI_BASE_URL=https://open.bigmodel.cn/api/paas/v4
+
+# 可选：模型名称（默认 gpt-4o-mini）
+MODEL=GLM-5.1
+```
+
+SDK 会自动加载 `.env` 文件。也可以通过环境变量或代码中传入 `apiKey` / `baseURL` 覆盖：
 
 ```typescript
 const config = {
-  model: "gpt-4o-mini",
+  model: "GLM-5.1",
   systemPrompt: "...",
   tools: [myTool],
-  apiKey: "sk-xxx",                     // 自定义 API Key
-  baseURL: "https://your-proxy/v1",     // 自定义 API 地址
+  apiKey: "your-key",                   // 覆盖 .env 中的值
+  baseURL: "https://your-proxy/v1",     // 覆盖 .env 中的值
 }
 ```
 
@@ -318,18 +323,12 @@ const result = await executor.execute(
 
 ## 运行示例
 
+配置好 `.env` 后直接运行：
+
 ```bash
-# 基础用法：单工具天气查询
-OPENAI_API_KEY=your-key pnpm example:basic
-
-# 多工具 + 多轮对话
-OPENAI_API_KEY=your-key pnpm example:custom-tools
-
-# MCP 集成
-OPENAI_API_KEY=your-key pnpm example:mcp
-
-# 使用自定义 API 地址（兼容 OpenAI 格式的第三方服务）
-OPENAI_API_KEY=your-key OPENAI_BASE_URL=https://your-proxy/v1 pnpm example:basic
+pnpm example:basic          # 单工具天气查询
+pnpm example:custom-tools   # 多工具 + 多轮对话
+pnpm example:mcp            # MCP 集成
 ```
 
 ## 项目结构
