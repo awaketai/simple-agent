@@ -1,3 +1,5 @@
+import "dotenv/config"
+
 /**
  * Custom tools example: multi-turn agent with multiple tools.
  *

@@ -1,3 +1,5 @@
+import "dotenv/config"
+
 /**
  * Basic usage example: a simple agent with a built-in tool.
  *

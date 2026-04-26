@@ -1,3 +1,5 @@
+import "dotenv/config"
+
 /**
  * MCP integration example: connect to MCP servers and use their tools.
  *

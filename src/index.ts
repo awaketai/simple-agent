@@ -1,5 +1,3 @@
-import "dotenv/config"
-
 // Core types
 export type {
   Message,
